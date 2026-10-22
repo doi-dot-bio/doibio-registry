@@ -1,0 +1,645 @@
+# doi.bio registry: the base vaults operated by doi.bio itself (lab "doi-dot-bio").
+# One file per operator: registry/<lab>.yml. Field reference: ../README.md.
+# Hand-maintained for now; central (github.com/sness23/www0) will read it once ingest lands.
+lab: doi-dot-bio
+name: doi.bio base vaults
+operator: doi.bio
+contact: https://doi.bio/agents
+maintainers: [sness]
+content_license: CC-BY-SA-4.0
+updated: 2026-10-22
+nodes:
+  www0:
+    role: production writer     # the one server that serves doi.bio and commits edits
+    root: /Users/sness/data/vaults
+  bb:
+    role: master copy           # the workstation holding every base vault and the search index
+    root: ~/data/vaults
+vaults:
+  - name: doi
+    kind: vault
+    host: doi.bio
+    origin:
+      type: git
+      url: https://github.com/doi-dot-bio/doi_doi
+      branch: main
+      visibility: private
+    locations:
+      - {type: disk, node: bb, path: ~/data/vaults/doi}
+      - {type: disk, node: www0, path: /Users/sness/data/vaults/doi, serves: true}
+      - {type: s3, bucket: doi.doi.bio, region: us-west-2}
+    served: true
+    editing: public
+    files: 112
+    markdown: 91
+    size: 43M
+    note: "the root vault: doi.bio/<slug> is a live topic page over every vault, a file here is the curated overlay"
+  - name: 3d
+    kind: vault
+    host: 3d.doi.bio
+    origin:
+      type: git
+      url: https://github.com/doi-dot-bio/3d_vault
+      branch: main
+      visibility: private
+    locations:
+      - {type: disk, node: bb, path: ~/data/vaults/3d}
+      - {type: s3, bucket: 3d.doi.bio, region: us-west-2}
+    served: false
+    files: 23
+    markdown: 1
+    size: 5.4M
+    note: "an S3 bucket exists but 3d.doi.bio is routed to a backend that is not running (502)"
+  - name: ab-initio
+    kind: vault
+    host: ab-initio.doi.bio
+    title: "Ab Initio Quantum Chemistry Software"
+    origin:
+      type: git
+      url: https://github.com/doi-dot-bio/ab_initio_vault
+      branch: main
+      visibility: private
+    locations:
+      - {type: disk, node: bb, path: ~/data/vaults/ab-initio}
+      - {type: s3, bucket: ab-initio.doi.bio, region: us-west-2}
+    served: false
+    files: 26
+    markdown: 26
+    size: 936K
+    note: "an S3 bucket exists but ab-initio.doi.bio answers 404; not cloned on www0"
+  - name: academy
+    kind: vault
+    host: academy.doi.bio
+    title: "Zax Academy"
+    origin:
+      type: git
+      url: https://github.com/doi-dot-bio/academy_vault
+      branch: main
+      visibility: private
+    locations:
+      - {type: disk, node: bb, path: ~/data/vaults/academy}
+    served: false
+    files: 20
+    markdown: 19
+    size: 476K
+  - name: ai
+    kind: vault
+    host: ai.doi.bio
+    origin:
+      type: git
+      url: https://github.com/doi-dot-bio/ai
+      branch: main
+      visibility: private
+    locations:
+      - {type: disk, node: bb, path: ~/data/vaults/ai}
+      - {type: disk, node: www0, path: /Users/sness/data/vaults/ai, serves: true}
+    served: true
+    editing: public
+    files: 23
+    markdown: 21
+    size: 444K
+  - name: arxiv
+    kind: vault
+    host: arxiv.doi.bio
+    title: "arXiv Papers"
+    origin:
+      type: git
+      url: https://github.com/doi-dot-bio/arxiv_vault
+      branch: main
+      visibility: private
+    locations:
+      - {type: disk, node: bb, path: ~/data/vaults/arxiv}
+    served: false
+    files: 324
+    markdown: 63
+    size: 338M
+  - name: atomica
+    kind: vault
+    host: atomica.doi.bio
+    title: "Atomica: a molecular world you can walk through"
+    origin:
+      type: git
+      url: https://github.com/doi-dot-bio/atomica_vault
+      branch: main
+      visibility: private
+    locations:
+      - {type: disk, node: bb, path: ~/data/vaults/atomica}
+    served: false
+    files: 46
+    markdown: 6
+    size: 80M
+  - name: authors
+    kind: vault
+    host: authors.doi.bio
+    origin:
+      type: git
+      url: https://github.com/doi-dot-bio/authors_vault
+      branch: main
+      visibility: private
+    locations:
+      - {type: disk, node: bb, path: ~/data/vaults/authors}
+    served: false
+    files: 8856
+    markdown: 8689
+    size: 90M
+  - name: blog
+    kind: vault
+    host: blog.doi.bio
+    title: "doi.bio Blog"
+    origin:
+      type: git
+      url: https://github.com/doi-dot-bio/blog_vault
+      branch: main
+      visibility: private
+    locations:
+      - {type: disk, node: bb, path: ~/data/vaults/blog}
+    served: false
+    files: 534
+    markdown: 40
+    size: 646M
+  - name: c
+    kind: vault
+    host: c.doi.bio
+    origin:
+      type: git
+      url: https://github.com/doi-dot-bio/c_vault
+      branch: main
+      visibility: private
+    locations:
+      - {type: disk, node: bb, path: ~/data/vaults/c}
+      - {type: disk, node: www0, path: /Users/sness/data/vaults/c, serves: true}
+    served: true
+    editing: public
+    files: 2
+    markdown: 2
+    size: 364K
+  - name: ci
+    kind: vault
+    host: ci.doi.bio
+    origin:
+      type: git
+      url: https://github.com/doi-dot-bio/ci_vault
+      branch: main
+      visibility: private
+    locations:
+      - {type: disk, node: bb, path: ~/data/vaults/ci}
+      - {type: disk, node: www0, path: /Users/sness/data/vaults/ci, serves: true}
+    served: true
+    editing: public
+    files: 1
+    markdown: 1
+    size: 224K
+  - name: companies
+    kind: vault
+    host: companies.doi.bio
+    origin:
+      type: git
+      url: https://github.com/doi-dot-bio/companies
+      branch: main
+      visibility: private
+    locations:
+      - {type: disk, node: bb, path: ~/data/vaults/companies}
+      - {type: disk, node: www0, path: /Users/sness/data/vaults/companies, serves: true}
+    served: true
+    editing: public
+    files: 739
+    markdown: 730
+    size: 11M
+  - name: crawl
+    kind: vault
+    host: crawl.doi.bio
+    origin:
+      type: git
+      url: https://github.com/doi-dot-bio/crawl_vault
+      branch: main
+      visibility: private
+    locations:
+      - {type: disk, node: bb, path: ~/data/vaults/crawl}
+    served: false
+    files: 88
+    markdown: 9
+    size: 2.3M
+  - name: docking-library
+    kind: vault
+    host: docking-library.doi.bio
+    title: "Docking Library"
+    origin:
+      type: git
+      url: https://github.com/doi-dot-bio/docking-library_vault
+      branch: main
+      visibility: private
+    locations:
+      - {type: disk, node: bb, path: ~/data/vaults/docking-library}
+    served: false
+    files: 74
+    markdown: 74
+    size: 2.6M
+  - name: dockquest
+    kind: vault
+    host: dockquest.doi.bio
+    origin:
+      type: git
+      url: https://github.com/doi-dot-bio/dockquest_vault
+      branch: main
+      visibility: private
+    locations:
+      - {type: disk, node: bb, path: ~/data/vaults/dockquest}
+      - {type: disk, node: www0, path: /Users/sness/data/vaults/dockquest, serves: true}
+    served: true
+    editing: public
+    files: 4
+    markdown: 0
+    size: 27M
+  - name: docs
+    kind: vault
+    host: docs.doi.bio
+    title: "doi.bio architecture documentation"
+    origin:
+      type: git
+      url: https://github.com/doi-dot-bio/docs_vault
+      branch: main
+      visibility: private
+    locations:
+      - {type: disk, node: bb, path: ~/data/vaults/docs}
+    served: false
+    files: 287
+    markdown: 287
+    size: 6.8M
+    note: "project documentation; served on bb only"
+  - name: folding
+    kind: vault
+    host: folding.doi.bio
+    title: "Protein Structure Prediction Tools"
+    origin:
+      type: git
+      url: https://github.com/doi-dot-bio/folding_vault
+      branch: main
+      visibility: private
+    locations:
+      - {type: disk, node: bb, path: ~/data/vaults/folding}
+    served: false
+    files: 60
+    markdown: 41
+    size: 2.3M
+  - name: institutions
+    kind: vault
+    host: institutions.doi.bio
+    title: "Institutions"
+    origin:
+      type: git
+      url: https://github.com/doi-dot-bio/institutions_vault
+      branch: main
+      visibility: private
+    locations:
+      - {type: disk, node: bb, path: ~/data/vaults/institutions}
+    served: false
+    files: 426
+    markdown: 426
+    size: 6.8M
+  - name: journals
+    kind: vault
+    host: journals.doi.bio
+    origin:
+      type: git
+      url: https://github.com/doi-dot-bio/journals_vault
+      branch: main
+      visibility: private
+    locations:
+      - {type: disk, node: bb, path: ~/data/vaults/journals}
+    served: false
+    files: 10
+    markdown: 2
+    size: 38M
+  - name: labs
+    kind: vault
+    host: labs.doi.bio
+    origin:
+      type: git
+      url: https://github.com/doi-dot-bio/labs_vault
+      branch: main
+      visibility: private
+    locations:
+      - {type: disk, node: bb, path: ~/data/vaults/labs}
+    served: false
+    files: 73
+    markdown: 73
+    size: 1.2M
+  - name: latent
+    kind: vault
+    host: latent.doi.bio
+    origin:
+      type: git
+      url: https://github.com/doi-dot-bio/latent_vault
+      branch: main
+      visibility: private
+    locations:
+      - {type: disk, node: bb, path: ~/data/vaults/latent}
+    served: false
+    files: 55
+    markdown: 10
+    size: 11M
+  - name: market
+    kind: vault
+    host: market.doi.bio
+    title: "market.doi.bio"
+    origin:
+      type: git
+      url: https://github.com/doi-dot-bio/market_vault
+      branch: master
+      visibility: private
+    locations:
+      - {type: disk, node: bb, path: ~/data/vaults/market}
+      - {type: disk, node: www0, path: /Users/sness/data/vaults/market, serves: true, note: plain copy without git; runs the market API}
+    served: true
+    files: 96
+    markdown: 12
+    size: 637M
+  - name: models
+    kind: vault
+    host: models.doi.bio
+    title: "Biological foundation models"
+    origin: null
+    locations:
+      - {type: disk, node: bb, path: ~/data/vaults/models}
+    served: false
+    files: 66
+    markdown: 66
+    size: 1.4M
+    note: "no GitHub repository yet (5 local commits on bb); to be created as doi-dot-bio/models_vault"
+  - name: mousearmy
+    kind: vault
+    host: mousearmy.doi.bio
+    origin:
+      type: git
+      url: https://github.com/doi-dot-bio/mousearmy_vault
+      branch: main
+      visibility: private
+    locations:
+      - {type: disk, node: bb, path: ~/data/vaults/mousearmy}
+    served: false
+    files: 1
+    markdown: 1
+    size: 216K
+  - name: mouseparty
+    kind: vault
+    host: mouseparty.doi.bio
+    title: "MouseParty: direct democracy platform"
+    origin:
+      type: git
+      url: https://github.com/doi-dot-bio/mouseparty_vault
+      branch: main
+      visibility: private
+    locations:
+      - {type: disk, node: bb, path: ~/data/vaults/mouseparty}
+    served: false
+    files: 32
+    markdown: 3
+    size: 476M
+  - name: nature
+    kind: vault
+    host: nature.doi.bio
+    title: "PDB Nature Search"
+    origin:
+      type: git
+      url: https://github.com/doi-dot-bio/nature_vault
+      branch: main
+      visibility: private
+    locations:
+      - {type: disk, node: bb, path: ~/data/vaults/nature}
+    served: false
+    files: 24
+    markdown: 7
+    size: 73M
+  - name: papers
+    kind: vault
+    host: papers.doi.bio
+    origin:
+      type: git
+      url: https://github.com/doi-dot-bio/papers_vault
+      branch: main
+      visibility: private
+    locations:
+      - {type: disk, node: bb, path: ~/data/vaults/papers}
+    served: false
+    files: 172
+    markdown: 172
+    size: 2.1M
+  - name: people
+    kind: vault
+    host: people.doi.bio
+    origin:
+      type: git
+      url: https://github.com/doi-dot-bio/people_vault
+      branch: main
+      visibility: private
+    locations:
+      - {type: disk, node: bb, path: ~/data/vaults/people}
+    served: false
+    files: 413
+    markdown: 377
+    size: 6.6M
+  - name: products
+    kind: vault
+    host: products.doi.bio
+    origin:
+      type: git
+      url: https://github.com/doi-dot-bio/products_vault
+      branch: main
+      visibility: private
+    locations:
+      - {type: disk, node: bb, path: ~/data/vaults/products}
+    served: false
+    files: 99
+    markdown: 52
+    size: 4.1M
+  - name: proteins
+    kind: vault
+    host: proteins.doi.bio
+    origin:
+      type: git
+      url: https://github.com/doi-dot-bio/proteins_vault
+      branch: main
+      visibility: private
+    locations:
+      - {type: disk, node: bb, path: ~/data/vaults/proteins}
+    served: false
+    files: 60549
+    markdown: 60548
+    size: 281M
+  - name: pubmed
+    kind: vault
+    host: pubmed.doi.bio
+    origin:
+      type: git
+      url: https://github.com/doi-dot-bio/pubmed_vault
+      branch: main
+      visibility: private
+    locations:
+      - {type: disk, node: bb, path: ~/data/vaults/pubmed}
+    served: false
+    files: 15443
+    markdown: 15433
+    size: 474M
+  - name: scholar
+    kind: vault
+    host: scholar.doi.bio
+    title: "Scholar Index"
+    origin:
+      type: git
+      url: https://github.com/doi-dot-bio/scholar0
+      branch: main
+      visibility: private
+    locations:
+      - {type: disk, node: bb, path: ~/data/vaults/scholar}
+    served: false
+    files: 179417
+    markdown: 179330
+    size: 5.1G
+    note: ".app/ holds the ScholarMD apps and 67k scholar profiles; run `npm install` for the apps"
+  - name: sness
+    kind: vault
+    host: sness.doi.bio
+    origin:
+      type: git
+      url: https://github.com/doi-dot-bio/sness_vault0
+      branch: main
+      visibility: private
+    locations:
+      - {type: disk, node: bb, path: ~/data/vaults/sness}
+      - {type: disk, node: www0, path: /Users/sness/data/vaults/sness, serves: true}
+    served: true
+    editing: owners
+    files: 140
+    markdown: 68
+    size: 47M
+    note: "personal vault of the operator; OWNERS lists sness only"
+  - name: structures
+    kind: vault
+    host: structures.doi.bio
+    origin:
+      type: git
+      url: https://github.com/doi-dot-bio/structures_vault
+      branch: main
+      visibility: private
+    locations:
+      - {type: disk, node: bb, path: ~/data/vaults/structures}
+    served: false
+    files: 10
+    markdown: 10
+    size: 324K
+  - name: uid
+    kind: vault
+    host: uid.doi.bio
+    origin:
+      type: git
+      url: https://github.com/doi-dot-bio/uid_vault
+      branch: main
+      visibility: private
+    locations:
+      - {type: disk, node: bb, path: ~/data/vaults/uid}
+    served: false
+    files: 66310
+    markdown: 66308
+    size: 321M
+  - name: wiki
+    kind: vault
+    host: wiki.doi.bio
+    title: "Wikipedia Biochemistry Index"
+    origin:
+      type: git
+      url: https://github.com/doi-dot-bio/wiki_vault
+      branch: main
+      visibility: private
+    locations:
+      - {type: disk, node: bb, path: ~/data/vaults/wiki}
+    served: false
+    files: 5294
+    markdown: 5291
+    size: 45M
+  - name: zax
+    kind: vault
+    host: zax.doi.bio
+    origin:
+      type: git
+      url: https://github.com/doi-dot-bio/zax_doi
+      branch: main
+      visibility: private
+    locations:
+      - {type: disk, node: bb, path: ~/data/vaults/zax}
+      - {type: disk, node: www0, path: /Users/sness/data/vaults/zax, serves: true}
+    served: true
+    editing: public
+    files: 6
+    markdown: 6
+    size: 600K
+  - name: src
+    kind: support
+    host: null
+    title: "Vault management scripts (gitpush, gitpull, build_index, s3-sync)"
+    origin:
+      type: git
+      url: https://github.com/doi-dot-bio/src_vault
+      branch: main
+      visibility: private
+    locations:
+      - {type: disk, node: bb, path: ~/data/vaults/src}
+    files: 35
+    markdown: 2
+    size: 1.7M
+  - name: tools
+    kind: support
+    host: null
+    title: "Tool notes and wrappers (foldseek, esm, rosetta, alphafold)"
+    origin:
+      type: git
+      url: https://github.com/doi-dot-bio/tools_doi
+      branch: main
+      visibility: private
+    locations:
+      - {type: disk, node: bb, path: ~/data/vaults/tools}
+    files: 8306
+    markdown: 451
+    size: 712M
+  - name: doibio-mcp
+    kind: support
+    host: null
+    title: "doibio-index MCP server"
+    origin:
+      type: git
+      url: https://github.com/doi-dot-bio/doibio-mcp
+      branch: main
+      visibility: private
+    locations:
+      - {type: disk, node: bb, path: ~/data/vaults/doibio-mcp}
+    files: 10
+    markdown: 1
+    size: 148M
+  - name: dockquest-mcp
+    kind: support
+    host: null
+    title: "DockQuest MCP server (no git repository)"
+    origin: null
+    locations:
+      - {type: disk, node: bb, path: ~/data/vaults/dockquest-mcp}
+    files: 0
+    markdown: 0
+    size: 156K
+    note: "no git repository; lives on bb only"
+
+# Hosts that www0 still serves from clones made before 2026-10-21 but that left the base
+# tree on bb (they are personal or business, not public science). Retire or move them.
+retiring:
+  - name: pitch
+    host: pitch.doi.bio
+    origin: {type: git, url: https://github.com/sness23/pitch_vault, branch: main, visibility: private}
+    locations:
+      - {type: disk, node: www0, path: /Users/sness/data/vaults/pitch, serves: true}
+      - {type: disk, node: bb, path: ~/data/ovaults/pitch}
+    served: true
+  - name: vcs
+    host: vcs.doi.bio
+    origin: {type: git, url: https://github.com/sness23/vcs_vault, branch: main, visibility: private}
+    locations:
+      - {type: disk, node: www0, path: /Users/sness/data/vaults/vcs, serves: true}
+      - {type: disk, node: bb, path: ~/data/ovaults/vcs}
+    served: true
